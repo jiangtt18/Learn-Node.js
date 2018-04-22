@@ -11,4 +11,13 @@ module.exports = (app) => {
   // googleStrategy will handle the scope in the passport
 
   app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get('/api/logout', (req, res) => {
+    req.logout(); // kill the cookie
+    res.send(req.user); // notify user that you signed out
+  });
+
+  app.get('/api/current_user', (req, res) => {
+    res.send(req.user);
+  });
+
 };
